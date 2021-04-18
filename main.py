@@ -1,13 +1,14 @@
 import random
 import vk_api
-from vk_api.longpoll import groups
 from vk_api.bot_longpoll import VkBotLongPoll, VkBotEventType
 from config import token
 
 vk_session = vk_api.VkApi(token=token)
-ts = groups.getL
-longpoll_ = VkBotLongPoll(vk_session, 204074660)
+# Получаем данные сессии
 vk = vk_session.get_api()
+# get_ts = vk.groups.getLongPollServer()
+# # Получаем лонгпул
+longpoll_ = VkBotLongPoll(vk_session, 204074660)
 file_read = open('dataBase.txt', 'r', encoding='windows-1251')
 temp = file_read.readlines()
 file_read.close()
