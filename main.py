@@ -8,6 +8,21 @@ from config import token
 vk_session = vk_api.VkApi(token=token)
 # Получаем данные сессии
 vk = vk_session.get_api()
+# chats = vk.messages.getConversationsById(peer_ids=[204074660])
+# while True:
+#     try:
+#         $this->sendMessage(2000000000 + $i, $message);
+#         $count++
+#     except:
+#         if $e->getCode() == 10:
+#             //значит такой беседы уже не существует, т.к. она является последней
+#             exit($count)
+#
+
+
+# print(chats)
+# for chat in chats['items']:
+#     print(chat)
 longpoll_ = VkBotLongPoll(vk_session, 204074660)
 file_read = open('dataBase.txt', 'r', encoding='windows-1251')
 temp = file_read.readlines()
@@ -58,7 +73,7 @@ def usual_message(text, user_id, chat_id):
     if random.randint(0, 9) < 10 and user_id != '-204074660':
         vk.messages.send(  # Отправляем собщение
             access_token=token,
-            chat_id=chat_id,
+            chat_id=3,
             random_id=random_id,
             message=temp[random.randint(0, len(temp) - 1)]
         )
@@ -74,7 +89,7 @@ def usual_message(text, user_id, chat_id):
 
 
 while True:
-    response = requests.get('https://{server}?act=a_check&key={key}&ts={ts}&wait=25&mode=2&version=2'.format(server=data['server'], key=data['key'], ts=data['ts'])).json()
+    response = requests.get('https://{server}?act=a_check&key={key}&ts={ts}&wait=25&mode=2&version=5.21'.format(server=data['server'], key=data['key'], ts=data['ts'])).json()
     updates = response['updates']
     if updates:  # проверка, были ли обновления
         for element in updates:  # проход по всем обновлениям в ответе
