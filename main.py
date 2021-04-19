@@ -28,7 +28,8 @@ longpoll_ = VkBotLongPoll(vk_session, 204074660)
 file_read = open('dataBase.txt', 'r', encoding='windows-1251')
 temp = file_read.readlines()
 file_read.close()
-data = requests.get('https://api.vk.com/method/messages.getLongPollServer', params={'access_token': token, 'v': 5.21}).json()['response']
+data = requests.get('https://api.vk.com/method/groups.getLongPollServer', params={'access_token': token, 'v': 5.21,
+                                                                                  'group_id':204074660}).json()['response']
 
 prob = 3
 
@@ -55,6 +56,7 @@ dict_commands = {
 
 while True:
     response = requests.get('https://{server}?act=a_check&key={key}&ts={ts}&wait=25&mode=2&version=5.21'.format(server=data['server'], key=data['key'], ts=data['ts'])).json()
+    # error requests.exceptions.ConnectionError: HTTPSConnectionPool(host='https', port=443): Max retries exceeded with url: //lp.vk.com/wh204074660?act=a_check&key=61fd4681a6acd72968d3fb0fea0784698cf6db34&ts=9&wait=25&mode=2&version=5.21 (Caused by NewConnectionError('<urllib3.connection.HTTPSConnection object at 0x0000021DB59AE820>: Failed to establish a new connection: [Errno 11001] getaddrinfo failed'))
     updates = response['updates']
     if updates:  # проверка, были ли обновления
         for element in updates:  # проход по всем обновлениям в ответе

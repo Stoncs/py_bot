@@ -40,7 +40,7 @@ def usual_message(text, user_id, chat_id, vk, temp):
     if random.randint(0, 9) < 10 and user_id != '-204074660':
         vk.messages.send(  # Отправляем собщение
             access_token=token,
-            chat_id=3,
+            chat_id=chat_id,
             random_id=random_id,
             message=temp[random.randint(0, len(temp) - 1)]
         )
