@@ -7,6 +7,7 @@ vk_session = vk_api.VkApi(token=token)
 # Получаем данные сессии
 vk = vk_session.get_api()
 # get_ts = vk.groups.getLongPollServer()
+
 # # Получаем лонгпул
 longpoll_ = VkBotLongPoll(vk_session, 204074660)
 file_read = open('dataBase.txt', 'r', encoding='windows-1251')
