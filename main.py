@@ -4,6 +4,7 @@ import requests
 import vk_api
 from vk_api.bot_longpoll import VkBotLongPoll, VkBotEventType
 from config import token
+from botActions import command_message, usual_message
 
 vk_session = vk_api.VkApi(token=token)
 # Получаем данные сессии
@@ -38,46 +39,10 @@ dict_commands = {
 }
 
 
-def command_message(text, user_id, chat_id):
-    random_id = round(random.random() * 10 ** 9)
-    if text.lower() == '/пример':
-        vk.messages.send(  # Отправляем собщение
-            access_token=token,
-            chat_id=chat_id,
-            random_id=random_id,
-            message='Примеррррр'
-        )
-    if text.lower() == 'глеб':
-        vk.messages.send(  # Отправляем собщение
-            access_token=token,
-            chat_id=chat_id,
-            random_id=random_id,
-            message='@kok_magic'
-        )
-    if text.lower() == 'коля':
-        vk.messages.send(  # Отправляем собщение
-            access_token=token,
-            chat_id=chat_id,
-            random_id=random_id,
-            message='@id235698561'
-        )
 
 
-def usual_message(text, user_id, chat_id):
-    file_write = open('dataBase.txt', 'a', encoding='windows-1251')
-    random_id = round(random.random() * 10 ** 9)
-    if user_id == '54849868':
-        if not temp.__contains__(text):
-            temp.append(text)
-            file_write.write('\n' + temp[-1])
-    if random.randint(0, 9) < 10 and user_id != '-204074660':
-        vk.messages.send(  # Отправляем собщение
-            access_token=token,
-            chat_id=3,
-            random_id=random_id,
-            message=temp[random.randint(0, len(temp) - 1)]
-        )
-    file_write.close()
+
+
 
 
 # for event in longpoll_.listen():
@@ -100,9 +65,9 @@ while True:
                 chat_id = element[3] - 2000000000
                 print(text)
                 if text in dict_commands:
-                    command_message(text, user_id, chat_id)
+                    command_message(text, user_id, chat_id, vk)
                 else:
-                    usual_message(text, user_id, chat_id)
+                    usual_message(text, user_id, chat_id, vk, temp)
 
     data['ts'] = response['ts']  # обновление номера последнего обновления
 
